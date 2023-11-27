@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { LONG_POLLING } from "./App";
 
-const LongPulling = ({ communcationMethod }) => {
+const LongPulling = ({ communcationMethod, updateCommuncationMethod }) => {
   const [messages, setMessages] = useState([]);
   const [value, setValue] = useState("");
   const isActiveMethod = communcationMethod === LONG_POLLING;
@@ -52,7 +52,19 @@ const LongPulling = ({ communcationMethod }) => {
 
   return (
     <div className="center">
-      <h2>Long Polling {isActiveMethod ? "(active)" : ""}</h2>
+      <h2>
+        {LONG_POLLING}{" "}
+        {isActiveMethod ? (
+          "(active)"
+        ) : (
+          <button
+            type="button"
+            onClick={() => updateCommuncationMethod(LONG_POLLING)}
+          >
+            Select
+          </button>
+        )}
+      </h2>
       <div>
         <form className="form" onSubmit={sendMessage}>
           <input

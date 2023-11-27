@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { EVENT_SOURCING } from "./App";
 
-const EventSourcing = ({ communcationMethod }) => {
+const EventSourcing = ({ communcationMethod, updateCommuncationMethod }) => {
   const [messages, setMessages] = useState([]);
   const [value, setValue] = useState("");
   const isActiveMethod = communcationMethod === EVENT_SOURCING;
@@ -46,7 +46,19 @@ const EventSourcing = ({ communcationMethod }) => {
 
   return (
     <div className="center">
-      <h2>Event Sourcing {isActiveMethod ? "(active)" : ""}</h2>
+      <h2>
+        {EVENT_SOURCING}{" "}
+        {isActiveMethod ? (
+          "(active)"
+        ) : (
+          <button
+            type="button"
+            onClick={() => updateCommuncationMethod(EVENT_SOURCING)}
+          >
+            Select
+          </button>
+        )}
+      </h2>
       <div>
         <form
           className="form"
